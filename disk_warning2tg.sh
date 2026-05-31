@@ -11,7 +11,7 @@ CHAT_ID="${CHAT_ID:--12345}"
 
 # Получаем список всех смонтированных физических разделов
 # Исключаем tmpfs, cdrom, loop-устройства и заголовки таблицы
-df -x tmpfs -x devtmpfs -x overlay -x squashfs -ll | tail -n +2 | while read -r line; do
+df -x tmpfs -x devtmpfs -x overlay -x squashfs -ll | grep -v '/boot/efi' | tail -n +2 | while read -r line; do
 
     # Извлекаем точку монтирования и процент использования
     MOUNT=$(echo "$line" | awk '{print $6}')
